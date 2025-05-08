@@ -1,0 +1,19 @@
+source leaprc.gaff2
+mol = loadmol2 ZnMim2.mol2
+loadmol2 2MZ.mol2
+loadamberparams MOH.frcmod
+loadamberparams 2MZ.frcmod
+loadamberparams ZnMim2.frcmod
+
+# 1.Use existing meohbox from other FF:
+source leaprc.protein.ff14SB
+loadamberparams frcmod.meoh
+loadOff solvents.lib
+solvatebox mol MEOHBOX 12.0 iso
+
+# 2. Use the MOH molecule in this directory, no need for other FF.
+#sol = loadmol2 MOH.mol2
+#solvatebox mol sol 12.0 iso
+
+saveamberparm mol ZnMim2.prmtop ZnMim2.inpcrd #Save AMBER topology and coordinate files
+quit #Quit tleap program

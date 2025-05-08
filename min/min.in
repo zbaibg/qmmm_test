@@ -1,0 +1,12 @@
+Initial MM minimization
+ &cntrl
+  imin=1,        ! 执行能量最小化
+  maxcyc=100000,   ! 最大最小化步数
+  ncyc=500,      ! 前500步使用最速下降法，后500步使用共轭梯度法
+  cut=8.0,       ! 非键相互作用截断距离（单位：Å）
+  ntb=1,         ! 周期性边界条件，恒定体积
+  !ntr=1,         ! 对特定原子施加位置约束
+  !restraint_wt=10.0,           ! 约束力常数（单位：kcal/mol·Å²）
+  !restraintmask=':1',       ! apply restraint to ZIF cluster, namely the first res
+ /
+

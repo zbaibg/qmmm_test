@@ -1,0 +1,25 @@
+HETATM    1  C2  2MZ     2M     -0.089  -0.017   0.668  0.00  0.00          cc  
+HETATM    2  C4  2MZ     2M     -0.757  -0.089  -1.364  0.00  0.00          cd  
+HETATM    3  C5  2MZ     2M      0.599   0.042  -1.421  0.00  0.00          cc  
+HETATM    4  C6  2MZ     2M     -0.026  -0.000   2.153  0.00  0.00          c3  
+HETATM    5 H4   2MZ     2M     -1.451  -0.161  -2.187  0.00  0.00          h4  
+HETATM    6  H5  2MZ     2M      1.289   0.105  -2.245  0.00  0.00          h4  
+HETATM    7  H61 2MZ     2M      0.332   0.959   2.530  0.00  0.00          hc  
+HETATM    8  H62 2MZ     2M     -1.018  -0.175   2.564  0.00  0.00          hc  
+HETATM    9  H63 2MZ     2M      0.642  -0.773   2.536  0.00  0.00          hc  
+HETATM   10 HN1  2MZ     2M      1.958   0.176   0.198  0.00  0.00          hn  
+HETATM   11  N1  2MZ     2M      1.006   0.085  -0.118  0.00  0.00          na  
+HETATM   12  N3  2MZ     2M     -1.174  -0.125  -0.061  0.00  0.00          nd  
+CONECT    1    4   12   11
+CONECT    2    3    5   12
+CONECT    3    2    6   11
+CONECT    4    1    7    8    9
+CONECT    5    2
+CONECT    6    3
+CONECT    7    4
+CONECT    8    4
+CONECT    9    4
+CONECT   10   11
+CONECT   11    1    3   10
+CONECT   12    1    2
+END

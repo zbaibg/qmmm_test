@@ -1,0 +1,3 @@
+parm ZnMim2.prmtop         # 加载拓扑文件
+trajin qmmm.nc              # 加载 AMBER NetCDF 轨迹
+trajout qmmm.pdb pdb

@@ -1,0 +1,1464 @@
+
+          -------------------------------------------------------
+          Amber 24 SANDER                              2024
+          -------------------------------------------------------
+
+| Run on 05/06/2025 at 03:14:51
+
+|   Executable path: sander
+| Working directory: /home/baizh/data/amber
+|          Hostname: Unknown
+  [-O]verwriting output
+
+File Assignments:
+|  MDIN: qmmm_solv.in                                                          
+| MDOUT: qmmm_solv.out                                                         
+|INPCRD: qmmm.rst                                                              
+|  PARM: ZnMim2.prmtop                                                         
+|RESTRT: qmmm_solv.rst                                                         
+|  REFC: refc                                                                  
+| MDVEL: mdvel                                                                 
+| MDFRC: mdfrc                                                                 
+|  MDEN: mden                                                                  
+| MDCRD: qmmm_solv.nc                                                          
+|MDINFO: mdinfo                                                                
+|  MTMD: mtmd                                                                  
+|INPDIP: inpdip                                                                
+|RSTDIP: rstdip                                                                
+|INPTRA: inptraj                                                               
+
+
+ Here is the input file:
+
+MM MD simulation with constant pressure                                        
+ &cntrl                                                                        
+  imin=0,            ! Molecular dynamics simulation                           
+  irest=1, ntx=5,    ! 表示读取速度和重启信息                       
+  ntb=2,             ! Constant pressure periodic boundary conditions          
+  cut=8.0,           ! Nonbonded cutoff in Angstroms                           
+  nstlim=100,      ! 继续再跑 50 ps（0.002 * 25000）                     
+  dt=0.002,          ! Time step in picoseconds                                
+  ntc=2, ntf=2,      ! SHAKE constraints on bonds involving hydrogen           
+  tempi=300, temp0=300, ! Initial and target temperature in Kelvin             
+  ntt=3, gamma_ln=1.0,  ! Langevin thermostat with collision frequency 1.0 ps^-1
+  ntp=1, pres0=1.0, taup=2.0, ! Isotropic pressure scaling with target pressure 1.0 bar
+  ntpr=1, ntwx=1, ntwr=10, ! Output frequencies for energy, trajectory, and restart files
+  ifqnt=1,           ! Turn on QM/MM calculation                               
+/                                                                              
+                                                                               
+&qmmm                                                                          
+  qmmask=':1',       ! ZIF                                                     
+  qmcharge=0,                                                                  
+  qm_theory='QUICK',      ! 可用 semi-empirical 或 external（如 Gaussian）
+  qmcut=8.0,                                                                   
+  writepdb=1,                                                                  
+  qmmm_int=1,                                                                  
+  adjust_q = 0, ! required, charge cannot be redistributed                     
+  vsolv = 2, ! switch on adQM/MM with fixed molecule numbers in A and T region 
+  /                                                                            
+&vsolv                                                                         
+  nearest_qm_solvent = 6, ! number of solvent molecules in A region            
+  nearest_qm_solvent_resname = 'MOH',                                          
+/                                                                              
+&adqmmm                                                                        
+    n_partition = 4,                                                           
+/                                                                              
+&quick                                                                         
+  method='hf',                                                                 
+  basis='sto-3g',                                                              
+/                                                                              
+                                                                               
+
+--------------------------------------------------------------------------------
+   1.  RESOURCE   USE: 
+--------------------------------------------------------------------------------
+
+| Flags:                                                                        
+ getting box info from netcdf restart file
+| NetCDF restart box info found
+|Largest sphere to fit in unit cell has radius =    16.891
+| New format PARM file being parsed.
+| Version =    1.000 Date = 05/05/25 Time = 03:57:28
+ NATOM  =    3551 NTYPES =      11 NBONH =    2362 MBONA  =     600
+ NTHETH =    4136 MTHETA =      14 NPHIH =    1790 MPHIA  =      16
+ NHPARM =       0 NPARM  =       0 NNB   =    9495 NRES   =     589
+ NBONA  =     600 NTHETA =      14 NPHIA =      16 NUMBND =      11
+ NUMANG =      15 NPTRA  =       6 NATYP =      12 NPHB   =       0
+ IFBOX  =       1 NMXRS  =      23 IFCAP =       0 NEXTRA =       0
+ NCOPY  =       0
+
+
+|     Memory Use     Allocated
+|     Real              818262
+|     Hollerith          11244
+|     Integer           215689
+|     Max Pairs        1183666
+|     nblistReal         42612
+|     nblist Int        194285
+|       Total            12994 kbytes
+
+| Note: 1-4 EEL scale factors are being read from the topology file.
+
+| Note: 1-4 VDW scale factors are being read from the topology file.
+| Duplicated    0 dihedrals
+| Duplicated    0 dihedrals
+LOADING THE QUANTUM ATOMS AS GROUPS
+     Mask :1; matches    23 atoms
+ 
+QMMM:         Variable QM Solvent Region is Active
+QMMM: ------------------------------------------------------
+QMMM:             Residue name of solvent molecules : MOH
+QMMM:                    Atoms per solvent molecule :      6
+QMMM: Total number of solvent molecules to consider :    588
+QMMM:                      Atoms in fixed QM region :     23
+QMMM:           Atoms in variable QM solvent region :     36
+QMMM:                      Total atoms in QM region :     59
+QMMM:    QM Solvent region update frequency (steps) :      1
+QMMM: ------------------------------------------------------
+ 
+
+     BOX TYPE: RECTILINEAR
+
+--------------------------------------------------------------------------------
+   2.  CONTROL  DATA  FOR  THE  RUN
+--------------------------------------------------------------------------------
+
+ZN                                                                              
+
+General flags:
+     imin    =       0, nmropt  =       0
+
+Nature and format of input:
+     ntx     =       5, irest   =       1, ntrx    =       1
+
+Nature and format of output:
+     ntxo    =       2, ntpr    =       1, ntrx    =       1, ntwr    =      10
+     iwrap   =       0, ntwx    =       1, ntwv    =       0, ntwe    =       0
+     ioutfm  =       1, ntwprt  =       0, idecomp =       0, rbornstat=      0
+
+Potential function:
+     ntf     =       2, ntb     =       2, igb     =       0, nsnb    =      25
+     ipol    =       0, gbsa    =       0, iesp    =       0
+     dielc   =   1.00000, cut     =   8.00000, intdiel =   1.00000
+
+Frozen or restrained atoms:
+     ibelly  =       0, ntr     =       0
+
+Molecular dynamics:
+     nstlim  =       100, nscm    =      1000, nrespa  =         1
+     t       =   0.00000, dt      =   0.00200, vlimit  =  20.00000
+
+Langevin dynamics temperature regulation:
+     ig      =   71277
+     temp0   = 300.00000, tempi   = 300.00000, gamma_ln=   1.00000
+
+Pressure regulation:
+     ntp     =       1
+     pres0   =   1.00000, comp    =  44.60000, taup    =   2.00000
+
+SHAKE:
+     ntc     =       2, jfastw  =       0
+     tol     =   0.00001
+
+Ewald parameters:
+     verbose =       0, ew_type =       0, nbflag  =       1, use_pme =       1
+     vdwmeth =       1, eedmeth =       1, netfrc  =       1
+     Box X =   34.176   Box Y =   33.783   Box Z =   33.948
+     Alpha =   90.000   Beta  =   90.000   Gamma =   90.000
+     NFFT1 =   36       NFFT2 =   36       NFFT3 =   36
+     Cutoff=    8.000   Tol   =0.100E-04
+     Ewald Coefficient =  0.34864
+     Interpolation order =    4
+
+QMMM options:
+             ifqnt = True       nquant =       59
+              qmgb =        0  qmcharge =        0   adjust_q =        0
+              spin =        1     qmcut =   8.0000    qmshake =        1
+          qmmm_int =        1
+     lnk_atomic_no =        1   lnk_dis =   1.0900 lnk_method =        1
+          qm_theory = QUICK    verbosity =        0
+            qmqmdx = Analytical
+          qm_ewald =        1 qm_pme = True 
+            kmaxqx =    8 kmaxqy =    8 kmaxqz =    8 ksqmaxq =  100
+
+QMMM VSOLV options:
+   debug                        =     F
+   verbosity                    =     0
+   nearest_qm_solvent           =     6
+   nearest_qm_solvent_fq        =     1
+   nearest_qm_solvent_resname   = MOH
+   nearest_qm_solvent_center_id =     0
+   qm_center_atom_id            =     0
+|  INFO: Old style inpcrd file read
+
+
+--------------------------------------------------------------------------------
+   3.  ATOMIC COORDINATES AND VELOCITIES
+--------------------------------------------------------------------------------
+
+ZN                                                                              
+ begin time read from input coords =    55.200 ps
+
+ Number of triangulated 3-point waters found:        0
+
+     Sum of charges from parm topology file =   0.00000232
+     Forcing neutrality...
+|  # of SOLUTE  degrees of freedom (RNDFP):    8291.
+|  # of SOLVENT degrees of freedom (RNDFS):       0.
+|  QMSHAKE_NOSHAKEMASK_OVERLAP =      0
+|  NDFMIN =    8291.     NUM_NOSHAKE =      0     CORRECTED RNDFP =    8291.
+|  TOTAL # of degrees of freedom (RNDF) =    8291.
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+| Local SIZE OF NONBOND LIST =     661818
+| TOTAL SIZE OF NONBOND LIST =     661818
+ cew: Checking partial charges. Modifications will be made if necessary.
+ cew: On input, the following charge
+ information was found.
+ cew: Sum of all partial charges:         -0.00000
+ cew: Sum of qmmask partial charges:       0.00000
+ cew: Sum of link atom partial charges:    0.00000
+ cew: Sum of MM partial charges:          -0.00000
+ cew: Expected sum of qmmask charges:      0
+ cew: Expected sum of link atom charges:   0.00000
+ cew: Each QM atom charge shifted by  -0.00000 so the underlying MM charges match the qmcharge
+ cew: Charge information after modifications.
+ cew: Sum of all partial charges:          0.00000
+ cew: Sum of qmmask partial charges:       0.00000
+ cew: Sum of link atom partial charges:    0.00000
+ cew: Sum of MM partial charges:           0.00000
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.1                                                                                                                                                                                                                                               
+
+ NSTEP =        1   TIME(PS) =      55.202  TEMP(K) =   313.74  PRESS =   912.0
+ Etot   =  -1854276.7230  EKtot   =      2584.5418  EPtot      =  -1856861.2647
+ BOND   =       198.9766  ANGLE   =      1100.8067  DIHED      =       173.6925
+ 1-4 NB =         0.0000  1-4 EEL =      3069.7614  VDWAALS    =     -1056.4147
+ EELEC  =     -3818.5331  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856529.5541
+ EKCMT  =       571.3002  VIRIAL  =      -200.4582  VOLUME     =     39194.4978
+                                                    Density    =         0.8074
+ Ewald error estimate:   0.1618E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.2                                                                                                                                                                                                                                               
+
+ NSTEP =        2   TIME(PS) =      55.204  TEMP(K) =   318.50  PRESS =   771.4
+ Etot   =  -1854275.3793  EKtot   =      2623.7861  EPtot      =  -1856899.1654
+ BOND   =       200.9654  ANGLE   =      1070.8513  DIHED      =       173.7050
+ 1-4 NB =         0.0000  1-4 EEL =      3072.2049  VDWAALS    =     -1062.7364
+ EELEC  =     -3811.0778  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856543.0779
+ EKCMT  =       570.1723  VIRIAL  =       -82.6435  VOLUME     =     39196.0903
+                                                    Density    =         0.8074
+ Ewald error estimate:   0.1936E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.3                                                                                                                                                                                                                                               
+
+ NSTEP =        3   TIME(PS) =      55.206  TEMP(K) =   320.36  PRESS =   610.1
+ Etot   =  -1854276.2085  EKtot   =      2639.0615  EPtot      =  -1856915.2699
+ BOND   =       199.4603  ANGLE   =      1065.6718  DIHED      =       173.5032
+ 1-4 NB =         0.0000  1-4 EEL =      3074.1716  VDWAALS    =     -1069.0663
+ EELEC  =     -3807.6271  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856551.3834
+ EKCMT  =       571.9524  VIRIAL  =        55.6504  VOLUME     =     39197.4370
+                                                    Density    =         0.8074
+ Ewald error estimate:   0.1795E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.4                                                                                                                                                                                                                                               
+
+ NSTEP =        4   TIME(PS) =      55.208  TEMP(K) =   318.05  PRESS =   443.7
+ Etot   =  -1854279.4282  EKtot   =      2620.0586  EPtot      =  -1856899.4869
+ BOND   =       194.8874  ANGLE   =      1084.2061  DIHED      =       173.2446
+ 1-4 NB =         0.0000  1-4 EEL =      3074.9301  VDWAALS    =     -1074.1683
+ EELEC  =     -3804.7799  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856547.8069
+ EKCMT  =       571.9129  VIRIAL  =       196.4115  VOLUME     =     39198.5018
+                                                    Density    =         0.8073
+ Ewald error estimate:   0.2014E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.5                                                                                                                                                                                                                                               
+
+ NSTEP =        5   TIME(PS) =      55.210  TEMP(K) =   316.09  PRESS =   331.2
+ Etot   =  -1854283.6154  EKtot   =      2603.9331  EPtot      =  -1856887.5485
+ BOND   =       190.0831  ANGLE   =      1098.4208  DIHED      =       173.3750
+ 1-4 NB =         0.0000  1-4 EEL =      3074.9840  VDWAALS    =     -1078.4876
+ EELEC  =     -3802.4385  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856543.4854
+ EKCMT  =       571.1542  VIRIAL  =       290.8198  VOLUME     =     39199.2757
+                                                    Density    =         0.8073
+ Ewald error estimate:   0.2222E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.6                                                                                                                                                                                                                                               
+
+ NSTEP =        6   TIME(PS) =      55.212  TEMP(K) =   317.18  PRESS =   266.8
+ Etot   =  -1854289.7774  EKtot   =      2612.8683  EPtot      =  -1856902.6458
+ BOND   =       187.2834  ANGLE   =      1089.8439  DIHED      =       173.5371
+ 1-4 NB =         0.0000  1-4 EEL =      3074.2459  VDWAALS    =     -1082.6024
+ EELEC  =     -3799.7157  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856545.2380
+ EKCMT  =       573.8033  VIRIAL  =       348.0125  VOLUME     =     39199.8530
+                                                    Density    =         0.8073
+ Ewald error estimate:   0.2342E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.7                                                                                                                                                                                                                                               
+
+ NSTEP =        7   TIME(PS) =      55.214  TEMP(K) =   318.77  PRESS =   195.1
+ Etot   =  -1854296.2726  EKtot   =      2625.9991  EPtot      =  -1856922.2716
+ BOND   =       187.8568  ANGLE   =      1071.1830  DIHED      =       173.8687
+ 1-4 NB =         0.0000  1-4 EEL =      3073.2003  VDWAALS    =     -1086.6925
+ EELEC  =     -3796.7463  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856544.9418
+ EKCMT  =       573.2199  VIRIAL  =       408.0487  VOLUME     =     39200.3176
+                                                    Density    =         0.8073
+ Ewald error estimate:   0.2853E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.8                                                                                                                                                                                                                                               
+
+ NSTEP =        8   TIME(PS) =      55.216  TEMP(K) =   318.31  PRESS =    97.7
+ Etot   =  -1854297.2280  EKtot   =      2622.2271  EPtot      =  -1856919.4551
+ BOND   =       190.7856  ANGLE   =      1066.2664  DIHED      =       174.4385
+ 1-4 NB =         0.0000  1-4 EEL =      3072.0236  VDWAALS    =     -1090.0745
+ EELEC  =     -3795.1476  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856537.7471
+ EKCMT  =       573.0821  VIRIAL  =       490.3779  VOLUME     =     39200.6571
+                                                    Density    =         0.8073
+ Ewald error estimate:   0.2344E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.9                                                                                                                                                                                                                                               
+
+ NSTEP =        9   TIME(PS) =      55.218  TEMP(K) =   316.40  PRESS =    -5.0
+ Etot   =  -1854296.2643  EKtot   =      2606.4526  EPtot      =  -1856902.7169
+ BOND   =       192.8939  ANGLE   =      1077.9141  DIHED      =       175.3104
+ 1-4 NB =         0.0000  1-4 EEL =      3070.9470  VDWAALS    =     -1092.1329
+ EELEC  =     -3797.0162  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856530.6332
+ EKCMT  =       572.2861  VIRIAL  =       576.5070  VOLUME     =     39200.8262
+                                                    Density    =         0.8073
+ Ewald error estimate:   0.1549E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.10                                                                                                                                                                                                                                              
+
+ NSTEP =       10   TIME(PS) =      55.220  TEMP(K) =   313.63  PRESS =   -75.7
+ Etot   =  -1854273.7172  EKtot   =      2583.6569  EPtot      =  -1856857.3742
+ BOND   =       194.3622  ANGLE   =      1121.7878  DIHED      =       176.1901
+ 1-4 NB =         0.0000  1-4 EEL =      3070.1703  VDWAALS    =     -1093.0406
+ EELEC  =     -3800.0599  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856526.7840
+ EKCMT  =       570.7297  VIRIAL  =       634.7690  VOLUME     =     39200.8157
+                                                    Density    =         0.8073
+ Ewald error estimate:   0.1152E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.11                                                                                                                                                                                                                                              
+
+ NSTEP =       11   TIME(PS) =      55.222  TEMP(K) =   313.47  PRESS =  -115.9
+ Etot   =  -1854286.5990  EKtot   =      2582.3459  EPtot      =  -1856868.9449
+ BOND   =       192.4297  ANGLE   =      1120.9492  DIHED      =       176.6952
+ 1-4 NB =         0.0000  1-4 EEL =      3069.1323  VDWAALS    =     -1091.5572
+ EELEC  =     -3812.3388  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856524.2555
+ EKCMT  =       570.6238  VIRIAL  =       668.7089  VOLUME     =     39200.6817
+                                                    Density    =         0.8073
+ Ewald error estimate:   0.5880E-04
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.12                                                                                                                                                                                                                                              
+
+ NSTEP =       12   TIME(PS) =      55.224  TEMP(K) =   316.84  PRESS =   -68.3
+ Etot   =  -1854295.1506  EKtot   =      2610.1075  EPtot      =  -1856905.2581
+ BOND   =       190.9847  ANGLE   =      1089.9654  DIHED      =       177.6704
+ 1-4 NB =         0.0000  1-4 EEL =      3068.6751  VDWAALS    =     -1090.8348
+ EELEC  =     -3816.3554  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856525.3634
+ EKCMT  =       568.1718  VIRIAL  =       625.9702  VOLUME     =     39200.4773
+                                                    Density    =         0.8073
+ Ewald error estimate:   0.7569E-04
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.13                                                                                                                                                                                                                                              
+
+ NSTEP =       13   TIME(PS) =      55.226  TEMP(K) =   319.58  PRESS =    36.9
+ Etot   =  -1854271.5943  EKtot   =      2632.6651  EPtot      =  -1856904.2594
+ BOND   =       193.8950  ANGLE   =      1086.4054  DIHED      =       178.9410
+ 1-4 NB =         0.0000  1-4 EEL =      3068.3353  VDWAALS    =     -1090.2811
+ EELEC  =     -3812.9316  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856528.6235
+ EKCMT  =       568.1744  VIRIAL  =       536.9176  VOLUME     =     39200.3562
+                                                    Density    =         0.8073
+ Ewald error estimate:   0.5945E-04
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.14                                                                                                                                                                                                                                              
+
+ NSTEP =       14   TIME(PS) =      55.228  TEMP(K) =   318.86  PRESS =   172.5
+ Etot   =  -1854273.6243  EKtot   =      2626.7413  EPtot      =  -1856900.3656
+ BOND   =       197.6745  ANGLE   =      1082.4052  DIHED      =       180.1939
+ 1-4 NB =         0.0000  1-4 EEL =      3068.6261  VDWAALS    =     -1090.7328
+ EELEC  =     -3808.7904  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856529.7421
+ EKCMT  =       567.1057  VIRIAL  =       421.1359  VOLUME     =     39200.4190
+                                                    Density    =         0.8073
+ Ewald error estimate:   0.9485E-04
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.15                                                                                                                                                                                                                                              
+
+ NSTEP =       15   TIME(PS) =      55.230  TEMP(K) =   315.92  PRESS =   303.7
+ Etot   =  -1854275.5502  EKtot   =      2602.5196  EPtot      =  -1856878.0698
+ BOND   =       198.3223  ANGLE   =      1099.5213  DIHED      =       181.3425
+ 1-4 NB =         0.0000  1-4 EEL =      3068.8660  VDWAALS    =     -1091.5803
+ EELEC  =     -3803.5956  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856530.9460
+ EKCMT  =       562.8653  VIRIAL  =       305.8226  VOLUME     =     39200.7188
+                                                    Density    =         0.8073
+ Ewald error estimate:   0.1361E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.16                                                                                                                                                                                                                                              
+
+ NSTEP =       16   TIME(PS) =      55.232  TEMP(K) =   314.11  PRESS =   414.2
+ Etot   =  -1854277.1844  EKtot   =      2587.6322  EPtot      =  -1856864.8167
+ BOND   =       193.0110  ANGLE   =      1116.8966  DIHED      =       182.1454
+ 1-4 NB =         0.0000  1-4 EEL =      3068.8304  VDWAALS    =     -1093.7864
+ EELEC  =     -3798.0139  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856533.8997
+ EKCMT  =       564.0591  VIRIAL  =       213.5180  VOLUME     =     39201.2480
+                                                    Density    =         0.8073
+ Ewald error estimate:   0.1559E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.17                                                                                                                                                                                                                                              
+
+ NSTEP =       17   TIME(PS) =      55.234  TEMP(K) =   314.28  PRESS =   469.3
+ Etot   =  -1854279.6151  EKtot   =      2589.0072  EPtot      =  -1856868.6223
+ BOND   =       184.8847  ANGLE   =      1117.2462  DIHED      =       182.5158
+ 1-4 NB =         0.0000  1-4 EEL =      3068.7427  VDWAALS    =     -1098.2350
+ EELEC  =     -3791.4500  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856532.3268
+ EKCMT  =       564.3577  VIRIAL  =       167.1674  VOLUME     =     39201.9703
+                                                    Density    =         0.8073
+ Ewald error estimate:   0.1463E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.18                                                                                                                                                                                                                                              
+
+ NSTEP =       18   TIME(PS) =      55.236  TEMP(K) =   314.86  PRESS =   492.5
+ Etot   =  -1854285.6908  EKtot   =      2593.8110  EPtot      =  -1856879.5017
+ BOND   =       179.7775  ANGLE   =      1101.9462  DIHED      =       182.4831
+ 1-4 NB =         0.0000  1-4 EEL =      3068.7681  VDWAALS    =     -1103.8124
+ EELEC  =     -3783.5831  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856525.0811
+ EKCMT  =       562.8478  VIRIAL  =       145.9739  VOLUME     =     39202.7890
+                                                    Density    =         0.8073
+ Ewald error estimate:   0.8765E-04
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.19                                                                                                                                                                                                                                              
+
+ NSTEP =       19   TIME(PS) =      55.238  TEMP(K) =   315.26  PRESS =   486.1
+ Etot   =  -1854290.3604  EKtot   =      2597.0569  EPtot      =  -1856887.4173
+ BOND   =       181.3311  ANGLE   =      1085.0101  DIHED      =       182.0789
+ 1-4 NB =         0.0000  1-4 EEL =      3069.2883  VDWAALS    =     -1109.9883
+ EELEC  =     -3775.1758  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856519.9616
+ EKCMT  =       559.9649  VIRIAL  =       148.5320  VOLUME     =     39203.6484
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.1021E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.20                                                                                                                                                                                                                                              
+
+ NSTEP =       20   TIME(PS) =      55.240  TEMP(K) =   313.72  PRESS =   451.8
+ Etot   =  -1854296.4205  EKtot   =      2584.3624  EPtot      =  -1856880.7829
+ BOND   =       188.8904  ANGLE   =      1082.8913  DIHED      =       181.3335
+ 1-4 NB =         0.0000  1-4 EEL =      3070.2317  VDWAALS    =     -1115.2266
+ EELEC  =     -3769.0223  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856519.8809
+ EKCMT  =       560.1976  VIRIAL  =       177.7264  VOLUME     =     39204.4965
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.1089E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.21                                                                                                                                                                                                                                              
+
+ NSTEP =       21   TIME(PS) =      55.242  TEMP(K) =   311.65  PRESS =   395.0
+ Etot   =  -1854292.2361  EKtot   =      2567.3428  EPtot      =  -1856859.5789
+ BOND   =       193.8188  ANGLE   =      1094.5944  DIHED      =       179.4509
+ 1-4 NB =         0.0000  1-4 EEL =      3071.2052  VDWAALS    =     -1119.1648
+ EELEC  =     -3759.2586  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856520.2246
+ EKCMT  =       557.4564  VIRIAL  =       223.0857  VOLUME     =     39205.2848
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.1926E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.22                                                                                                                                                                                                                                              
+
+ NSTEP =       22   TIME(PS) =      55.244  TEMP(K) =   310.96  PRESS =   250.0
+ Etot   =  -1854297.3719  EKtot   =      2561.6362  EPtot      =  -1856859.0081
+ BOND   =       190.0570  ANGLE   =      1103.8050  DIHED      =       178.3459
+ 1-4 NB =         0.0000  1-4 EEL =      3072.1702  VDWAALS    =     -1123.5837
+ EELEC  =     -3761.0577  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856518.7449
+ EKCMT  =       556.2834  VIRIAL  =       344.6495  VOLUME     =     39205.9738
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.9537E-04
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.23                                                                                                                                                                                                                                              
+
+ NSTEP =       23   TIME(PS) =      55.246  TEMP(K) =   311.96  PRESS =   117.7
+ Etot   =  -1854305.2335  EKtot   =      2569.8644  EPtot      =  -1856875.0978
+ BOND   =       180.3834  ANGLE   =      1102.5691  DIHED      =       177.2638
+ 1-4 NB =         0.0000  1-4 EEL =      3072.9531  VDWAALS    =     -1127.1351
+ EELEC  =     -3764.5482  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856516.5838
+ EKCMT  =       556.6777  VIRIAL  =       457.0430  VOLUME     =     39206.4092
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.5451E-04
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.24                                                                                                                                                                                                                                              
+
+ NSTEP =       24   TIME(PS) =      55.248  TEMP(K) =   313.53  PRESS =    24.9
+ Etot   =  -1854311.0280  EKtot   =      2582.8409  EPtot      =  -1856893.8689
+ BOND   =       176.1522  ANGLE   =      1102.8428  DIHED      =       177.0059
+ 1-4 NB =         0.0000  1-4 EEL =      3073.7330  VDWAALS    =     -1129.0588
+ EELEC  =     -3775.8781  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856518.6658
+ EKCMT  =       553.8673  VIRIAL  =       532.8296  VOLUME     =     39206.6133
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.1727E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.25                                                                                                                                                                                                                                              
+
+ NSTEP =       25   TIME(PS) =      55.250  TEMP(K) =   315.87  PRESS =     7.6
+ Etot   =  -1854333.0657  EKtot   =      2602.0830  EPtot      =  -1856935.1487
+ BOND   =       174.7852  ANGLE   =      1085.4245  DIHED      =       175.7899
+ 1-4 NB =         0.0000  1-4 EEL =      3074.3575  VDWAALS    =     -1129.8525
+ EELEC  =     -3781.6967  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856533.9565
+ EKCMT  =       551.9895  VIRIAL  =       545.5872  VOLUME     =     39206.6550
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.1617E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.26                                                                                                                                                                                                                                              
+
+ NSTEP =       26   TIME(PS) =      55.252  TEMP(K) =   318.44  PRESS =    29.8
+ Etot   =  -1854320.0912  EKtot   =      2623.2715  EPtot      =  -1856943.3627
+ BOND   =       179.0048  ANGLE   =      1091.3736  DIHED      =       174.0425
+ 1-4 NB =         0.0000  1-4 EEL =      3072.9942  VDWAALS    =     -1127.3037
+ EELEC  =     -3776.8931  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856556.5810
+ EKCMT  =       551.0703  VIRIAL  =       525.8851  VOLUME     =     39206.6664
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.2459E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.27                                                                                                                                                                                                                                              
+
+ NSTEP =       27   TIME(PS) =      55.254  TEMP(K) =   319.17  PRESS =    37.9
+ Etot   =  -1854318.8532  EKtot   =      2629.3019  EPtot      =  -1856948.1551
+ BOND   =       183.8930  ANGLE   =      1084.2084  DIHED      =       173.3852
+ 1-4 NB =         0.0000  1-4 EEL =      3071.8733  VDWAALS    =     -1126.1897
+ EELEC  =     -3772.7537  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856562.5715
+ EKCMT  =       552.3051  VIRIAL  =       520.2003  VOLUME     =     39206.7167
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.2764E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.28                                                                                                                                                                                                                                              
+
+ NSTEP =       28   TIME(PS) =      55.256  TEMP(K) =   317.36  PRESS =    65.9
+ Etot   =  -1854156.2694  EKtot   =      2614.3729  EPtot      =  -1856770.6423
+ BOND   =       216.6232  ANGLE   =      1208.7638  DIHED      =       172.9170
+ 1-4 NB =         0.0000  1-4 EEL =      3072.8273  VDWAALS    =     -1123.9323
+ EELEC  =     -3763.8607  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856553.9805
+ EKCMT  =       553.5486  VIRIAL  =       497.7420  VOLUME     =     39206.7813
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.2330E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.29                                                                                                                                                                                                                                              
+
+ NSTEP =       29   TIME(PS) =      55.258  TEMP(K) =   318.68  PRESS =    51.0
+ Etot   =  -1854160.9359  EKtot   =      2625.2618  EPtot      =  -1856786.1977
+ BOND   =       212.4116  ANGLE   =      1186.9069  DIHED      =       172.8981
+ 1-4 NB =         0.0000  1-4 EEL =      3070.9256  VDWAALS    =     -1121.1734
+ EELEC  =     -3759.1088  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856549.0577
+ EKCMT  =       553.3557  VIRIAL  =       510.2215  VOLUME     =     39206.8948
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.1323E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.30                                                                                                                                                                                                                                              
+
+ NSTEP =       30   TIME(PS) =      55.260  TEMP(K) =   319.97  PRESS =     2.9
+ Etot   =  -1854263.3543  EKtot   =      2635.9189  EPtot      =  -1856899.2732
+ BOND   =       185.3630  ANGLE   =      1095.9791  DIHED      =       173.3498
+ 1-4 NB =         0.0000  1-4 EEL =      3067.8894  VDWAALS    =     -1118.9670
+ EELEC  =     -3752.9303  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856549.9573
+ EKCMT  =       552.0090  VIRIAL  =       549.5947  VOLUME     =     39206.9822
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.4012E-04
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.31                                                                                                                                                                                                                                              
+
+ NSTEP =       31   TIME(PS) =      55.262  TEMP(K) =   318.67  PRESS =   -25.2
+ Etot   =  -1854269.8092  EKtot   =      2625.1786  EPtot      =  -1856894.9878
+ BOND   =       182.0240  ANGLE   =      1096.9255  DIHED      =       173.6945
+ 1-4 NB =         0.0000  1-4 EEL =      3067.3837  VDWAALS    =     -1117.8437
+ EELEC  =     -3745.3353  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856551.8364
+ EKCMT  =       552.1607  VIRIAL  =       573.4794  VOLUME     =     39206.9854
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.1156E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.32                                                                                                                                                                                                                                              
+
+ NSTEP =       32   TIME(PS) =      55.264  TEMP(K) =   318.02  PRESS =   -59.3
+ Etot   =  -1854269.4562  EKtot   =      2619.8519  EPtot      =  -1856889.3080
+ BOND   =       180.7695  ANGLE   =      1093.5375  DIHED      =       174.4320
+ 1-4 NB =         0.0000  1-4 EEL =      3067.5953  VDWAALS    =     -1117.6794
+ EELEC  =     -3734.8536  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856553.1093
+ EKCMT  =       551.5759  VIRIAL  =       601.7717  VOLUME     =     39206.9396
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.1856E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.33                                                                                                                                                                                                                                              
+
+ NSTEP =       33   TIME(PS) =      55.266  TEMP(K) =   315.99  PRESS =  -100.0
+ Etot   =  -1854099.9617  EKtot   =      2603.1327  EPtot      =  -1856703.0944
+ BOND   =       192.7818  ANGLE   =      1261.0541  DIHED      =       174.5415
+ 1-4 NB =         0.0000  1-4 EEL =      3069.1528  VDWAALS    =     -1119.3785
+ EELEC  =     -3729.0068  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856552.2393
+ EKCMT  =       546.9215  VIRIAL  =       631.5817  VOLUME     =     39206.8342
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.2961E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.34                                                                                                                                                                                                                                              
+
+ NSTEP =       34   TIME(PS) =      55.268  TEMP(K) =   315.09  PRESS =  -228.6
+ Etot   =  -1854301.0616  EKtot   =      2595.6488  EPtot      =  -1856896.7104
+ BOND   =       190.6935  ANGLE   =      1085.5708  DIHED      =       175.6085
+ 1-4 NB =         0.0000  1-4 EEL =      3068.8938  VDWAALS    =     -1115.4088
+ EELEC  =     -3754.6521  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856547.4160
+ EKCMT  =       548.8138  VIRIAL  =       742.3573  VOLUME     =     39206.6576
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.3227E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.35                                                                                                                                                                                                                                              
+
+ NSTEP =       35   TIME(PS) =      55.270  TEMP(K) =   313.46  PRESS =  -228.0
+ Etot   =  -1854307.2435  EKtot   =      2582.2437  EPtot      =  -1856889.4872
+ BOND   =       197.3742  ANGLE   =      1086.3947  DIHED      =       176.0651
+ 1-4 NB =         0.0000  1-4 EEL =      3069.5299  VDWAALS    =     -1114.7684
+ EELEC  =     -3758.9666  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856545.1161
+ EKCMT  =       550.9607  VIRIAL  =       743.9713  VOLUME     =     39206.2560
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.2878E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.36                                                                                                                                                                                                                                              
+
+ NSTEP =       36   TIME(PS) =      55.272  TEMP(K) =   312.97  PRESS =  -175.4
+ Etot   =  -1854317.2335  EKtot   =      2578.2365  EPtot      =  -1856895.4700
+ BOND   =       198.5444  ANGLE   =      1082.7128  DIHED      =       176.3168
+ 1-4 NB =         0.0000  1-4 EEL =      3070.2908  VDWAALS    =     -1115.5902
+ EELEC  =     -3761.2486  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856546.4960
+ EKCMT  =       549.5033  VIRIAL  =       697.9549  VOLUME     =     39205.8556
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.1796E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.37                                                                                                                                                                                                                                              
+
+ NSTEP =       37   TIME(PS) =      55.274  TEMP(K) =   314.85  PRESS =   -42.5
+ Etot   =  -1854198.1490  EKtot   =      2593.7064  EPtot      =  -1856791.8554
+ BOND   =       196.1453  ANGLE   =      1171.8641  DIHED      =       176.4846
+ 1-4 NB =         0.0000  1-4 EEL =      3071.2530  VDWAALS    =     -1119.1510
+ EELEC  =     -3744.4571  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856543.9943
+ EKCMT  =       552.6906  VIRIAL  =       588.6704  VOLUME     =     39205.5472
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.1435E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.38                                                                                                                                                                                                                                              
+
+ NSTEP =       38   TIME(PS) =      55.276  TEMP(K) =   316.92  PRESS =    40.1
+ Etot   =  -1854286.2253  EKtot   =      2610.7564  EPtot      =  -1856896.9817
+ BOND   =       187.1969  ANGLE   =      1070.9829  DIHED      =       176.2086
+ 1-4 NB =         0.0000  1-4 EEL =      3071.3546  VDWAALS    =     -1117.5551
+ EELEC  =     -3750.7675  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856534.4023
+ EKCMT  =       553.6944  VIRIAL  =       519.7157  VOLUME     =     39205.4711
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.3318E-04
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.39                                                                                                                                                                                                                                              
+
+ NSTEP =       39   TIME(PS) =      55.278  TEMP(K) =   316.24  PRESS =    84.4
+ Etot   =  -1854224.5049  EKtot   =      2605.1890  EPtot      =  -1856829.6938
+ BOND   =       181.0009  ANGLE   =      1130.5331  DIHED      =       175.7911
+ 1-4 NB =         0.0000  1-4 EEL =      3072.3323  VDWAALS    =     -1124.7058
+ EELEC  =     -3735.5839  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856529.0616
+ EKCMT  =       551.4863  VIRIAL  =       480.0786  VOLUME     =     39205.5395
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.6627E-04
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.40                                                                                                                                                                                                                                              
+
+ NSTEP =       40   TIME(PS) =      55.280  TEMP(K) =   316.13  PRESS =    52.7
+ Etot   =  -1854298.2781  EKtot   =      2604.2805  EPtot      =  -1856902.5586
+ BOND   =       180.5408  ANGLE   =      1080.5535  DIHED      =       175.2312
+ 1-4 NB =         0.0000  1-4 EEL =      3073.1948  VDWAALS    =     -1127.4307
+ EELEC  =     -3749.6845  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856534.9636
+ EKCMT  =       552.1682  VIRIAL  =       507.5441  VOLUME     =     39205.6853
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.9653E-05
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.41                                                                                                                                                                                                                                              
+
+ NSTEP =       41   TIME(PS) =      55.282  TEMP(K) =   316.77  PRESS =    71.7
+ Etot   =  -1854301.9060  EKtot   =      2609.5308  EPtot      =  -1856911.4367
+ BOND   =       180.0293  ANGLE   =      1081.0254  DIHED      =       174.8283
+ 1-4 NB =         0.0000  1-4 EEL =      3073.9491  VDWAALS    =     -1132.3655
+ EELEC  =     -3743.4218  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856545.4816
+ EKCMT  =       550.2888  VIRIAL  =       489.5887  VOLUME     =     39205.7757
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.7834E-04
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.42                                                                                                                                                                                                                                              
+
+ NSTEP =       42   TIME(PS) =      55.284  TEMP(K) =   314.11  PRESS =   154.3
+ Etot   =  -1854148.8202  EKtot   =      2587.6464  EPtot      =  -1856736.4667
+ BOND   =       183.5846  ANGLE   =      1239.8453  DIHED      =       174.8034
+ 1-4 NB =         0.0000  1-4 EEL =      3074.9790  VDWAALS    =     -1138.8021
+ EELEC  =     -3724.6333  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856546.2435
+ EKCMT  =       552.5534  VIRIAL  =       421.9296  VOLUME     =     39205.8994
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.1394E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.43                                                                                                                                                                                                                                              
+
+ NSTEP =       43   TIME(PS) =      55.286  TEMP(K) =   314.88  PRESS =   204.5
+ Etot   =  -1854153.7384  EKtot   =      2593.9695  EPtot      =  -1856747.7080
+ BOND   =       183.1789  ANGLE   =      1227.7500  DIHED      =       175.0515
+ 1-4 NB =         0.0000  1-4 EEL =      3075.1758  VDWAALS    =     -1143.1282
+ EELEC  =     -3720.0164  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856545.7194
+ EKCMT  =       554.3240  VIRIAL  =       381.2258  VOLUME     =     39206.1674
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.2217E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.44                                                                                                                                                                                                                                              
+
+ NSTEP =       44   TIME(PS) =      55.288  TEMP(K) =   317.95  PRESS =   187.0
+ Etot   =  -1854316.6156  EKtot   =      2619.2125  EPtot      =  -1856935.8281
+ BOND   =       178.4219  ANGLE   =      1062.4273  DIHED      =       174.9478
+ 1-4 NB =         0.0000  1-4 EEL =      3074.1384  VDWAALS    =     -1146.4557
+ EELEC  =     -3730.9198  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856548.3880
+ EKCMT  =       557.2449  VIRIAL  =       398.9610  VOLUME     =     39206.5233
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.1825E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.45                                                                                                                                                                                                                                              
+
+ NSTEP =       45   TIME(PS) =      55.290  TEMP(K) =   316.12  PRESS =   176.4
+ Etot   =  -1854322.8999  EKtot   =      2604.1265  EPtot      =  -1856927.0264
+ BOND   =       178.4670  ANGLE   =      1074.5698  DIHED      =       175.4593
+ 1-4 NB =         0.0000  1-4 EEL =      3073.0174  VDWAALS    =     -1151.4888
+ EELEC  =     -3730.5743  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856546.4766
+ EKCMT  =       559.2554  VIRIAL  =       409.9260  VOLUME     =     39206.8485
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.1627E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.46                                                                                                                                                                                                                                              
+
+ NSTEP =       46   TIME(PS) =      55.292  TEMP(K) =   313.89  PRESS =   215.0
+ Etot   =  -1854318.0566  EKtot   =      2585.8110  EPtot      =  -1856903.8676
+ BOND   =       181.7041  ANGLE   =      1087.8942  DIHED      =       176.3476
+ 1-4 NB =         0.0000  1-4 EEL =      3071.4969  VDWAALS    =     -1151.1905
+ EELEC  =     -3723.2674  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856546.8525
+ EKCMT  =       560.9290  VIRIAL  =       378.9306  VOLUME     =     39207.1552
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.2047E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.47                                                                                                                                                                                                                                              
+
+ NSTEP =       47   TIME(PS) =      55.294  TEMP(K) =   315.56  PRESS =   143.0
+ Etot   =  -1854319.9353  EKtot   =      2599.5307  EPtot      =  -1856919.4659
+ BOND   =       185.4085  ANGLE   =      1088.6050  DIHED      =       176.7981
+ 1-4 NB =         0.0000  1-4 EEL =      3069.8064  VDWAALS    =     -1154.7874
+ EELEC  =     -3725.2018  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856560.0948
+ EKCMT  =       564.5576  VIRIAL  =       443.5346  VOLUME     =     39207.5294
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.1454E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.48                                                                                                                                                                                                                                              
+
+ NSTEP =       48   TIME(PS) =      55.296  TEMP(K) =   320.84  PRESS =    -7.7
+ Etot   =  -1854323.7686  EKtot   =      2643.0089  EPtot      =  -1856966.7775
+ BOND   =       185.0126  ANGLE   =      1074.2497  DIHED      =       177.1426
+ 1-4 NB =         0.0000  1-4 EEL =      3068.0204  VDWAALS    =     -1158.7711
+ EELEC  =     -3727.9266  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856584.5051
+ EKCMT  =       569.4433  VIRIAL  =       575.9506  VOLUME     =     39207.7776
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.1759E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.49                                                                                                                                                                                                                                              
+
+ NSTEP =       49   TIME(PS) =      55.298  TEMP(K) =   325.33  PRESS =  -306.6
+ Etot   =  -1854346.7146  EKtot   =      2680.0415  EPtot      =  -1857026.7562
+ BOND   =       180.8426  ANGLE   =      1062.2040  DIHED      =       176.9089
+ 1-4 NB =         0.0000  1-4 EEL =      3066.7499  VDWAALS    =     -1167.1394
+ EELEC  =     -3741.9622  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856604.3600
+ EKCMT  =       573.5504  VIRIAL  =       833.1097  VOLUME     =     39207.7624
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.1381E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.50                                                                                                                                                                                                                                              
+
+ NSTEP =       50   TIME(PS) =      55.300  TEMP(K) =   326.37  PRESS =  -523.4
+ Etot   =  -1854347.0232  EKtot   =      2688.6245  EPtot      =  -1857035.6477
+ BOND   =       175.8480  ANGLE   =      1059.7809  DIHED      =       177.0526
+ 1-4 NB =         0.0000  1-4 EEL =      3066.0661  VDWAALS    =     -1165.9691
+ EELEC  =     -3743.6284  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856604.7979
+ EKCMT  =       573.6834  VIRIAL  =      1016.7175  VOLUME     =     39207.2245
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.9590E-04
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.51                                                                                                                                                                                                                                              
+
+ NSTEP =       51   TIME(PS) =      55.302  TEMP(K) =   323.81  PRESS =  -775.2
+ Etot   =  -1854343.6708  EKtot   =      2667.5503  EPtot      =  -1857011.2211
+ BOND   =       175.4062  ANGLE   =      1073.3243  DIHED      =       178.6101
+ 1-4 NB =         0.0000  1-4 EEL =      3065.8275  VDWAALS    =     -1168.6368
+ EELEC  =     -3746.4419  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856589.3104
+ EKCMT  =       576.1644  VIRIAL  =      1232.4176  VOLUME     =     39206.3076
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.9805E-04
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.52                                                                                                                                                                                                                                              
+
+ NSTEP =       52   TIME(PS) =      55.304  TEMP(K) =   319.30  PRESS =  -934.9
+ Etot   =  -1854341.4031  EKtot   =      2630.3445  EPtot      =  -1856971.7476
+ BOND   =       181.4838  ANGLE   =      1088.3314  DIHED      =       179.0561
+ 1-4 NB =         0.0000  1-4 EEL =      3066.1459  VDWAALS    =     -1173.2442
+ EELEC  =     -3741.3688  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856572.1518
+ EKCMT  =       579.1714  VIRIAL  =      1370.5616  VOLUME     =     39204.9503
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.5597E-04
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.53                                                                                                                                                                                                                                              
+
+ NSTEP =       53   TIME(PS) =      55.306  TEMP(K) =   316.14  PRESS = -1004.9
+ Etot   =  -1854340.5174  EKtot   =      2604.3509  EPtot      =  -1856944.8683
+ BOND   =       190.9507  ANGLE   =      1098.2864  DIHED      =       179.2113
+ 1-4 NB =         0.0000  1-4 EEL =      3067.3024  VDWAALS    =     -1178.8192
+ EELEC  =     -3733.5217  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856568.2782
+ EKCMT  =       583.2278  VIRIAL  =      1433.8043  VOLUME     =     39203.3138
+                                                    Density    =         0.8072
+ Ewald error estimate:   0.5417E-04
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.54                                                                                                                                                                                                                                              
+
+ NSTEP =       54   TIME(PS) =      55.308  TEMP(K) =   316.75  PRESS = -1042.2
+ Etot   =  -1854346.3931  EKtot   =      2609.3850  EPtot      =  -1856955.7781
+ BOND   =       195.5185  ANGLE   =      1084.3315  DIHED      =       179.2071
+ 1-4 NB =         0.0000  1-4 EEL =      3069.0071  VDWAALS    =     -1185.0417
+ EELEC  =     -3725.4779  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856573.3227
+ EKCMT  =       585.7863  VIRIAL  =      1467.9231  VOLUME     =     39201.5551
+                                                    Density    =         0.8073
+ Ewald error estimate:   0.1256E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.55                                                                                                                                                                                                                                              
+
+ NSTEP =       55   TIME(PS) =      55.310  TEMP(K) =   320.09  PRESS = -1058.2
+ Etot   =  -1854354.7075  EKtot   =      2636.8363  EPtot      =  -1856991.5438
+ BOND   =       190.2988  ANGLE   =      1053.5301  DIHED      =       179.0978
+ 1-4 NB =         0.0000  1-4 EEL =      3070.9784  VDWAALS    =     -1190.8816
+ EELEC  =     -3720.0000  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856574.5673
+ EKCMT  =       585.9089  VIRIAL  =      1481.5488  VOLUME     =     39199.7311
+                                                    Density    =         0.8073
+ Ewald error estimate:   0.1665E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.56                                                                                                                                                                                                                                              
+
+ NSTEP =       56   TIME(PS) =      55.312  TEMP(K) =   322.27  PRESS = -1021.5
+ Etot   =  -1854355.2277  EKtot   =      2654.8523  EPtot      =  -1857010.0799
+ BOND   =       178.1216  ANGLE   =      1040.4664  DIHED      =       178.9951
+ 1-4 NB =         0.0000  1-4 EEL =      3072.8245  VDWAALS    =     -1196.8013
+ EELEC  =     -3714.8394  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856568.8468
+ EKCMT  =       586.4613  VIRIAL  =      1450.9950  VOLUME     =     39197.8793
+                                                    Density    =         0.8074
+ Ewald error estimate:   0.2113E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.57                                                                                                                                                                                                                                              
+
+ NSTEP =       57   TIME(PS) =      55.314  TEMP(K) =   321.19  PRESS =  -873.9
+ Etot   =  -1854354.9719  EKtot   =      2645.9554  EPtot      =  -1857000.9273
+ BOND   =       167.4566  ANGLE   =      1057.8419  DIHED      =       179.2152
+ 1-4 NB =         0.0000  1-4 EEL =      3073.7039  VDWAALS    =     -1198.4906
+ EELEC  =     -3713.4068  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856567.2474
+ EKCMT  =       588.8638  VIRIAL  =      1328.4183  VOLUME     =     39196.0917
+                                                    Density    =         0.8074
+ Ewald error estimate:   0.1938E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.58                                                                                                                                                                                                                                              
+
+ NSTEP =       58   TIME(PS) =      55.316  TEMP(K) =   318.63  PRESS =  -707.5
+ Etot   =  -1854361.6785  EKtot   =      2624.8500  EPtot      =  -1856986.5284
+ BOND   =       164.9470  ANGLE   =      1082.5074  DIHED      =       179.2727
+ 1-4 NB =         0.0000  1-4 EEL =      3074.0385  VDWAALS    =     -1198.7114
+ EELEC  =     -3713.8411  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856574.7417
+ EKCMT  =       588.1194  VIRIAL  =      1186.8084  VOLUME     =     39194.5623
+                                                    Density    =         0.8074
+ Ewald error estimate:   0.1670E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.59                                                                                                                                                                                                                                              
+
+ NSTEP =       59   TIME(PS) =      55.318  TEMP(K) =   318.56  PRESS =  -606.1
+ Etot   =  -1854367.5550  EKtot   =      2624.2363  EPtot      =  -1856991.7913
+ BOND   =       169.4218  ANGLE   =      1081.1123  DIHED      =       179.3198
+ 1-4 NB =         0.0000  1-4 EEL =      3074.0291  VDWAALS    =     -1199.2887
+ EELEC  =     -3715.6130  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856580.7726
+ EKCMT  =       585.6273  VIRIAL  =      1098.5028  VOLUME     =     39193.3239
+                                                    Density    =         0.8074
+ Ewald error estimate:   0.2091E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.60                                                                                                                                                                                                                                              
+
+ NSTEP =       60   TIME(PS) =      55.320  TEMP(K) =   320.34  PRESS =  -576.7
+ Etot   =  -1854369.2890  EKtot   =      2638.9102  EPtot      =  -1857008.1991
+ BOND   =       176.5810  ANGLE   =      1056.2062  DIHED      =       179.2881
+ 1-4 NB =         0.0000  1-4 EEL =      3073.9443  VDWAALS    =     -1199.9504
+ EELEC  =     -3718.7573  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856575.5110
+ EKCMT  =       592.1706  VIRIAL  =      1080.1380  VOLUME     =     39192.2627
+                                                    Density    =         0.8075
+ Ewald error estimate:   0.2256E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.61                                                                                                                                                                                                                                              
+
+ NSTEP =       61   TIME(PS) =      55.322  TEMP(K) =   319.50  PRESS =  -582.0
+ Etot   =  -1854373.7149  EKtot   =      2632.0365  EPtot      =  -1857005.7514
+ BOND   =       182.6340  ANGLE   =      1045.8126  DIHED      =       179.2012
+ 1-4 NB =         0.0000  1-4 EEL =      3073.8490  VDWAALS    =     -1199.6626
+ EELEC  =     -3722.9031  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856564.6826
+ EKCMT  =       593.4840  VIRIAL  =      1085.9251  VOLUME     =     39191.2530
+                                                    Density    =         0.8075
+ Ewald error estimate:   0.1758E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.62                                                                                                                                                                                                                                              
+
+ NSTEP =       62   TIME(PS) =      55.324  TEMP(K) =   315.64  PRESS =  -563.8
+ Etot   =  -1854378.9920  EKtot   =      2600.2329  EPtot      =  -1856979.2250
+ BOND   =       186.9653  ANGLE   =      1070.9853  DIHED      =       178.8997
+ 1-4 NB =         0.0000  1-4 EEL =      3073.8496  VDWAALS    =     -1197.9249
+ EELEC  =     -3727.2863  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856564.7137
+ EKCMT  =       593.0452  VIRIAL  =      1070.1305  VOLUME     =     39190.2340
+                                                    Density    =         0.8075
+ Ewald error estimate:   0.1869E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.63                                                                                                                                                                                                                                              
+
+ NSTEP =       63   TIME(PS) =      55.326  TEMP(K) =   312.12  PRESS =  -496.3
+ Etot   =  -1854384.9013  EKtot   =      2571.2030  EPtot      =  -1856956.1043
+ BOND   =       188.7256  ANGLE   =      1100.9623  DIHED      =       179.1680
+ 1-4 NB =         0.0000  1-4 EEL =      3073.8488  VDWAALS    =     -1192.9297
+ EELEC  =     -3733.2349  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856572.6445
+ EKCMT  =       592.6890  VIRIAL  =      1012.6040  VOLUME     =     39189.2468
+                                                    Density    =         0.8075
+ Ewald error estimate:   0.1574E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.64                                                                                                                                                                                                                                              
+
+ NSTEP =       64   TIME(PS) =      55.328  TEMP(K) =   311.46  PRESS =  -449.9
+ Etot   =  -1854387.9433  EKtot   =      2565.7915  EPtot      =  -1856953.7348
+ BOND   =       183.9662  ANGLE   =      1108.4925  DIHED      =       178.6665
+ 1-4 NB =         0.0000  1-4 EEL =      3073.7308  VDWAALS    =     -1189.4336
+ EELEC  =     -3734.8027  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856574.3546
+ EKCMT  =       590.0514  VIRIAL  =       970.6971  VOLUME     =     39188.3776
+                                                    Density    =         0.8075
+ Ewald error estimate:   0.6624E-04
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.65                                                                                                                                                                                                                                              
+
+ NSTEP =       65   TIME(PS) =      55.330  TEMP(K) =   314.49  PRESS =  -387.7
+ Etot   =  -1854388.7215  EKtot   =      2590.7496  EPtot      =  -1856979.4710
+ BOND   =       177.6700  ANGLE   =      1080.7052  DIHED      =       177.8302
+ 1-4 NB =         0.0000  1-4 EEL =      3073.1324  VDWAALS    =     -1185.1200
+ EELEC  =     -3732.6348  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856571.0540
+ EKCMT  =       591.0840  VIRIAL  =       919.1157  VOLUME     =     39187.5896
+                                                    Density    =         0.8076
+ Ewald error estimate:   0.2174E-04
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.66                                                                                                                                                                                                                                              
+
+ NSTEP =       66   TIME(PS) =      55.332  TEMP(K) =   319.62  PRESS =  -310.1
+ Etot   =  -1854392.7861  EKtot   =      2632.9592  EPtot      =  -1857025.7453
+ BOND   =       176.0212  ANGLE   =      1034.4170  DIHED      =       176.9906
+ 1-4 NB =         0.0000  1-4 EEL =      3071.8930  VDWAALS    =     -1180.0156
+ EELEC  =     -3726.4887  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856578.5627
+ EKCMT  =       591.9703  VIRIAL  =       854.3722  VOLUME     =     39186.9103
+                                                    Density    =         0.8076
+ Ewald error estimate:   0.4106E-04
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.67                                                                                                                                                                                                                                              
+
+ NSTEP =       67   TIME(PS) =      55.334  TEMP(K) =   322.44  PRESS =  -254.0
+ Etot   =  -1854397.5000  EKtot   =      2656.2478  EPtot      =  -1857053.7478
+ BOND   =       180.5619  ANGLE   =      1009.0699  DIHED      =       176.2182
+ 1-4 NB =         0.0000  1-4 EEL =      3070.2732  VDWAALS    =     -1174.4541
+ EELEC  =     -3719.7428  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856595.6742
+ EKCMT  =       594.0990  VIRIAL  =       809.0041  VOLUME     =     39186.3665
+                                                    Density    =         0.8076
+ Ewald error estimate:   0.1486E-04
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.68                                                                                                                                                                                                                                              
+
+ NSTEP =       68   TIME(PS) =      55.336  TEMP(K) =   320.32  PRESS =  -250.9
+ Etot   =  -1854397.0512  EKtot   =      2638.7912  EPtot      =  -1857035.8423
+ BOND   =       186.8515  ANGLE   =      1027.4529  DIHED      =       175.8990
+ 1-4 NB =         0.0000  1-4 EEL =      3068.5103  VDWAALS    =     -1169.9518
+ EELEC  =     -3713.9763  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856610.6281
+ EKCMT  =       598.1670  VIRIAL  =       810.4716  VOLUME     =     39185.9208
+                                                    Density    =         0.8076
+ Ewald error estimate:   0.1129E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.69                                                                                                                                                                                                                                              
+
+ NSTEP =       69   TIME(PS) =      55.338  TEMP(K) =   316.57  PRESS =  -294.6
+ Etot   =  -1854396.2346  EKtot   =      2607.8692  EPtot      =  -1857004.1038
+ BOND   =       190.1132  ANGLE   =      1066.9333  DIHED      =       175.9262
+ 1-4 NB =         0.0000  1-4 EEL =      3066.7471  VDWAALS    =     -1168.0216
+ EELEC  =     -3710.8790  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856624.9230
+ EKCMT  =       605.2466  VIRIAL  =       854.5241  VOLUME     =     39185.4805
+                                                    Density    =         0.8076
+ Ewald error estimate:   0.2388E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.70                                                                                                                                                                                                                                              
+
+ NSTEP =       70   TIME(PS) =      55.340  TEMP(K) =   317.98  PRESS =  -356.2
+ Etot   =  -1854401.6472  EKtot   =      2619.4583  EPtot      =  -1857021.1054
+ BOND   =       187.5524  ANGLE   =      1086.2927  DIHED      =       175.7910
+ 1-4 NB =         0.0000  1-4 EEL =      3065.2229  VDWAALS    =     -1169.3939
+ EELEC  =     -3709.8674  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856656.7031
+ EKCMT  =       616.6715  VIRIAL  =       918.0449  VOLUME     =     39184.9639
+                                                    Density    =         0.8076
+ Ewald error estimate:   0.2448E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.71                                                                                                                                                                                                                                              
+
+ NSTEP =       71   TIME(PS) =      55.342  TEMP(K) =   327.22  PRESS =  -431.0
+ Etot   =  -1854407.4263  EKtot   =      2695.6008  EPtot      =  -1857103.0271
+ BOND   =       180.1787  ANGLE   =      1073.3791  DIHED      =       175.2450
+ 1-4 NB =         0.0000  1-4 EEL =      3064.5554  VDWAALS    =     -1171.7703
+ EELEC  =     -3710.2586  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856714.3564
+ EKCMT  =       634.8233  VIRIAL  =       999.4418  VOLUME     =     39184.3396
+                                                    Density    =         0.8076
+ Ewald error estimate:   0.1381E-03
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.72                                                                                                                                                                                                                                              
+
+ NSTEP =       72   TIME(PS) =      55.344  TEMP(K) =   342.38  PRESS =  -596.7
+ Etot   =  -1854406.9928  EKtot   =      2820.5130  EPtot      =  -1857227.5058
+ BOND   =       173.3348  ANGLE   =      1049.8104  DIHED      =       174.5380
+ 1-4 NB =         0.0000  1-4 EEL =      3065.2932  VDWAALS    =     -1172.1147
+ EELEC  =     -3711.1325  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856807.2350
+ EKCMT  =       672.0399  VIRIAL  =      1176.8701  VOLUME     =     39183.5847
+                                                    Density    =         0.8076
+ Ewald error estimate:   0.5709E-04
+ ------------------------------------------------------------------------------
+
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.73                                                                                                                                                                                                                                              
+
+ NSTEP =       73   TIME(PS) =      55.346  TEMP(K) =   383.88  PRESS = -1435.5
+ Etot   =  -1854341.0516  EKtot   =      3162.3820  EPtot      =  -1857503.4335
+ BOND   =       170.4900  ANGLE   =      1039.0309  DIHED      =       174.1228
+ 1-4 NB =         0.0000  1-4 EEL =      3067.5737  VDWAALS    =     -1169.7978
+ EELEC  =     -3712.0979  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1857072.7551
+ EKCMT  =       751.0556  VIRIAL  =      1965.4934  VOLUME     =     39182.5401
+                                                    Density    =         0.8077
+ Ewald error estimate:   0.4750E-04
+ ------------------------------------------------------------------------------
+
+vlimit exceeded for step     73; vmax =    98.3190
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.74                                                                                                                                                                                                                                              
+
+ NSTEP =       74   TIME(PS) =      55.348  TEMP(K) =  1564.02  PRESS =-41330.2
+ Etot   =  -1849720.3307  EKtot   =     12884.2617  EPtot      =  -1862604.5925
+ BOND   =       169.4235  ANGLE   =      1041.2408  DIHED      =       174.0413
+ 1-4 NB =         0.0000  1-4 EEL =      3071.0519  VDWAALS    =     -1165.2694
+ EELEC  =     -3713.0441  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1862182.0365
+ EKCMT  =      1123.7135  VIRIAL  =     36086.8314  VOLUME     =     39180.0297
+                                                    Density    =         0.8077
+ Ewald error estimate:   0.8275E-04
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+vlimit exceeded for step     74; vmax =    30.9773
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.75                                                                                                                                                                                                                                              
+
+ NSTEP =       75   TIME(PS) =      55.350  TEMP(K) =  4279.71  PRESS = 33519.9
+ Etot   =  -1821502.1538  EKtot   =     35255.8527  EPtot      =  -1856758.0065
+ BOND   =       168.0585  ANGLE   =      1080.2283  DIHED      =       174.9059
+ 1-4 NB =         0.0000  1-4 EEL =      3074.1155  VDWAALS    =     -1152.7790
+ EELEC  =     -3705.5155  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856397.0203
+ EKCMT  =     29170.3380  VIRIAL  =       866.5994  VOLUME     =     39107.8064
+                                                    Density    =         0.8092
+ Ewald error estimate:   0.1441E-03
+ ------------------------------------------------------------------------------
+
+vlimit exceeded for step     75; vmax =    21.2310
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.76                                                                                                                                                                                                                                              
+
+ NSTEP =       76   TIME(PS) =      55.352  TEMP(K) =  4312.56  PRESS = 31766.8
+ Etot   =  -1821331.3547  EKtot   =     35526.4108  EPtot      =  -1856857.7655
+ BOND   =       162.0344  ANGLE   =      1073.2865  DIHED      =       175.1446
+ 1-4 NB =         0.0000  1-4 EEL =      3077.4412  VDWAALS    =     -1158.7973
+ EELEC  =     -3698.5144  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1856488.3605
+ EKCMT  =     29009.2967  VIRIAL  =      2145.7792  VOLUME     =     39166.2703
+                                                    Density    =         0.8080
+ Ewald error estimate:   0.1676E-03
+ ------------------------------------------------------------------------------
+
+vlimit exceeded for step     76; vmax =    26.5176
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.77                                                                                                                                                                                                                                              
+
+ NSTEP =       77   TIME(PS) =      55.354  TEMP(K) =  4323.60  PRESS = 32112.4
+ Etot   =  -1820675.5754  EKtot   =     35617.4321  EPtot      =  -1856293.0075
+ BOND   =       160.9837  ANGLE   =      1055.1707  DIHED      =       175.3419
+ 1-4 NB =         0.0000  1-4 EEL =      3079.4943  VDWAALS    =     -1146.5037
+ EELEC  =     -3694.0089  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1855923.4854
+ EKCMT  =     28793.0227  VIRIAL  =      1598.7711  VOLUME     =     39221.7592
+                                                    Density    =         0.8069
+ Ewald error estimate:   0.1934E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+vlimit exceeded for step     77; vmax =    20.9693
+QMMM: Writing QM coordinates to PDB file: qmmm_region.pdb.78                                                                                                                                                                                                                                              
+
+ NSTEP =       78   TIME(PS) =      55.356  TEMP(K) =  4267.46  PRESS = 32712.0
+ Etot   =  -1821003.6308  EKtot   =     35154.9578  EPtot      =  -1856158.5886
+ BOND   =       169.4490  ANGLE   =      1051.4623  DIHED      =       175.2924
+ 1-4 NB =         0.0000  1-4 EEL =      3079.6948  VDWAALS    =     -1052.5634
+ EELEC  =     -3689.4969  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ QUICKESCF=  -1855892.4268
+ EKCMT  =     28263.3960  VIRIAL  =       521.6308  VOLUME     =     39277.9313
+                                                    Density    =         0.8057
+ Ewald error estimate:   0.2512E-03
+ ------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8332E-11   at   2.782960
+ ---------------------------------------------------
+vlimit exceeded for step     78; vmax = 43489.2528
+
+     Coordinate resetting (SHAKE) cannot be accomplished,
+     deviation is too large
+     NITER, NIT, LL, I and J are :      0      0    930   1403   1402
+
+     Note: This is usually a symptom of some deeper
+     problem with the energetics of the system.

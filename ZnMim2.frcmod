@@ -1,0 +1,27 @@
+Remark line goes here
+MASS
+Zn 65.380        0.360               same as c1 
+
+BOND
+cc-n1  536.50   1.311       same as ce-n1, penalty score=  3.4
+cd-n1  536.50   1.311       same as cf-n1, penalty score=  3.4
+
+ANGLE
+cc-n1-cd    0.000       0.000   ATTN, need revision
+n1-cc-nc   71.929     122.885   Calculated using n1-ca-nc, penalty score= 23.5
+c3-cc-n1   67.303     116.915   Calculated using n1-ca-c3, penalty score= 23.5
+cd-cd-n1   70.196     118.525   Calculated using n1-ca-ca, penalty score= 25.5
+h4-cd-n1   51.769     121.035   Calculated using n1-c2-h4, penalty score= 30.0
+
+DIHE
+
+IMPROPER
+c3-n1-cc-nc         1.1          180.0         2.0          Using the default value
+cd-h4-cd-n1         1.1          180.0         2.0          Same as X -X -ca-ha, penalty score= 67.2 (use general term))
+cd-h4-cd-nc         1.1          180.0         2.0          Same as X -X -ca-ha, penalty score= 67.2 (use general term))
+
+NONBON
+  Zn          1.9080  0.2100             same as c1 
+
+
+

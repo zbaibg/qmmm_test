@@ -1,0 +1,79 @@
+-I: Adding /home/baizh/soft/miniforge3/envs/amber/dat/leap/prep to search path.
+-I: Adding /home/baizh/soft/miniforge3/envs/amber/dat/leap/lib to search path.
+-I: Adding /home/baizh/soft/miniforge3/envs/amber/dat/leap/parm to search path.
+-I: Adding /home/baizh/soft/miniforge3/envs/amber/dat/leap/cmd to search path.
+-s: Ignoring all leaprc startup files.
+-f: Source tleap.in.
+
+Welcome to LEaP!
+Sourcing: ./tleap.in
+----- Source: /home/baizh/soft/miniforge3/envs/amber/dat/leap/cmd/leaprc.gaff2
+----- Source of /home/baizh/soft/miniforge3/envs/amber/dat/leap/cmd/leaprc.gaff2 done
+Log file: ./leap.log
+Loading parameters: /home/baizh/soft/miniforge3/envs/amber/dat/leap/parm/gaff2.dat
+Reading title:
+AMBER General Force Field for organic molecules (Version 2.2.20, March 2021)
+Loading Mol2 file: ./ZnMim2.mol2
+Reading MOLECULE named ZN
+Loading Mol2 file: ./2MZ.mol2
+Reading MOLECULE named 2MZ
+Loading parameters: ./MOH.frcmod
+Reading force field modification type file (frcmod)
+Reading title:
+Remark line goes here
+Loading parameters: ./2MZ.frcmod
+Reading force field modification type file (frcmod)
+Reading title:
+Remark line goes here
+Loading parameters: ./ZnMim2.frcmod
+Reading force field modification type file (frcmod)
+Reading title:
+Remark line goes here
+----- Source: /home/baizh/soft/miniforge3/envs/amber/dat/leap/cmd/leaprc.protein.ff14SB
+----- Source of /home/baizh/soft/miniforge3/envs/amber/dat/leap/cmd/leaprc.protein.ff14SB done
+Log file: ./leap.log
+Loading parameters: /home/baizh/soft/miniforge3/envs/amber/dat/leap/parm/parm10.dat
+Reading title:
+PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA
+Loading parameters: /home/baizh/soft/miniforge3/envs/amber/dat/leap/parm/frcmod.ff14SB
+Reading force field modification type file (frcmod)
+Reading title:
+ff14SB protein backbone and sidechain parameters
+Loading library: /home/baizh/soft/miniforge3/envs/amber/dat/leap/lib/amino12.lib
+Loading library: /home/baizh/soft/miniforge3/envs/amber/dat/leap/lib/aminoct12.lib
+Loading library: /home/baizh/soft/miniforge3/envs/amber/dat/leap/lib/aminont12.lib
+Loading parameters: /home/baizh/soft/miniforge3/envs/amber/dat/leap/parm/frcmod.meoh
+Reading force field modification type file (frcmod)
+Reading title:
+vdw meoh 
+Loading library: /home/baizh/soft/miniforge3/envs/amber/dat/leap/lib/solvents.lib
+  Solute vdw bounding box:              11.993 8.327 6.928
+  Total bounding box for atom centers:  35.993 35.993 35.993
+      (box expansion for 'iso' is  29.6%)
+  Solvent unit box:                     20.089 20.089 20.089
+  Volume: 58429.276 A^3 
+  Total mass 19057.692 amu,  Density 0.542 g/cc
+  Added 588 residues.
+Checking Unit.
+Building topology.
+Building atom parameters.
+Building bond parameters.
+Building angle parameters.
+Building proper torsion parameters.
+Building improper torsion parameters.
+ total 6 improper torsions applied
+Building H-Bond parameters.
+Incorporating Non-Bonded adjustments.
+Not Marking per-residue atom chain types.
+Marking per-residue atom chain types.
+  (Residues lacking connect0/connect1 - 
+   these don't have chain types marked:
+
+	res	total affected
+
+	ZN	1
+  )
+ (no restraints)
+	Quit
+
+Exiting LEaP: Errors = 0; Warnings = 0; Notes = 0.

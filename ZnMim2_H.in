@@ -1,0 +1,9 @@
+original_pdb ZnMim2_H.pdb
+group_name ZnMim2_H
+cut_off 2.8
+ion_ids 1
+ion_mol2files ZN.mol2
+naa_mol2files 2MZ.mol2
+forcefield gaff2
+software_version g09
+large_opt 0
