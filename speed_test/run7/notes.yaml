@@ -1,0 +1,21 @@
+id: run7
+name: HF STO-3G QUICK 8 cores
+group: HF STO3G
+software: quick
+cpucore: 8
+gpu_num: 0
+input_rst: ../qmmm_hf.rst
+method: HF
+basis: STO-3G
+dispersion_correction: D3BJ
+MAXITER: 200
+E_unit: kcal/mol
+nstep: 10
+elapsed_s: 101.77
+sec_per_step: 10.177
+days_per_100ps: 5.889467592592593
+software_version: conda ambertools2025
+qm_ewald: 1 # This is 1 by default. Should set to 0 explicitly for qm/mm with quick-API
+DENSERMS: 1e-06
+software_version_abbrev: conda
+timestep_fs: 2

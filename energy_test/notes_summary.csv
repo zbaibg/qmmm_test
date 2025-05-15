@@ -1,0 +1,5 @@
+id,name,group,comment,software,cpucore,gpu_num,traj,input_rst,method,basis,dispersion_correction,DENSERMS,MAXITER,EPtot,E_unit,SCF_E_tolerance
+run0,HF STO3G QUICK,yaml_empty,yaml_empty,quick,8,0,../qmmm_pbe_Def2TZVP/hpc_10core_orca/qmmm.nc,../qmmm_hf.rst,HF,STO-3G,D3BJ,1e-06,200,"[-1429475.6658, -1429474.8641, -1429450.3686, -1429429.8407, -1429438.5157, -1429464.9777, -1429474.5158, -1429460.3421, -1429438.2235, -1429436.5168]",kcal/mol,
+run1,HF STO3G ORCA,yaml_empty,yaml_empty,orca,8,0,../qmmm_pbe_Def2TZVP/hpc_10core_orca/qmmm.nc,../qmmm_hf.rst,HF,STO-3G,D3BJ,,125,"[-1429483.8737, -1429483.4776, -1429458.9178, -1429438.518, -1429447.0702, -1429473.9643, -1429483.0786, -1429469.9009, -1429446.4918, -1429445.7317]",kcal/mol,1.0e-08 au
+template_orca,HF STO3G ORCA,yaml_empty,yaml_empty,orca,8,0,../qmmm_pbe_Def2TZVP/hpc_10core_orca/qmmm.nc,../qmmm_hf.rst,HF,STO-3G,D3BJ,,125,,kcal/mol,1.0e-08 au
+template_quick,HF STO3G QUICK,yaml_empty,yaml_empty,quick,8,0,../qmmm_pbe_Def2TZVP/hpc_10core_orca/qmmm.nc,../qmmm_hf.rst,HF,STO-3G,D3BJ,1e-06,200,,kcal/mol,

@@ -1,0 +1,25 @@
+Bootstrap: debootstrap
+OSVersion: focal
+MirrorURL: http://us.archive.ubuntu.com/ubuntu/
+
+%post
+    # Update package lists
+    apt-get update
+    
+    # Install basic build dependencies
+    apt-get install -y tcsh make \
+                      gcc gfortran \
+                      flex bison patch bc wget \
+                      xorg-dev libz-dev libbz2-dev
+    
+    # Install OpenMPI for parallel compilation
+    apt-get install -y openmpi-bin libopenmpi-dev openssh-client
+    
+    # Clean up
+    apt-get clean
+    rm -rf /var/lib/apt/lists/*
+
+%labels
+    Author "Your Name"
+    Version v1.0
+    Description "Ubuntu 20.04 container with dependencies for building Amber" 

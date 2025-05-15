@@ -1,0 +1,15 @@
+id: template_quick_apptainer
+name: HF STO3G QUICK
+group:
+comment:
+software: quick_apptainer
+cpucore: 8
+gpu_num: 0
+traj: ../qmmm_pbe_Def2TZVP/hpc_10core_orca/qmmm.nc
+input_rst: ../qmmm_hf.rst
+method: HF
+basis: STO-3G
+dispersion_correction: D3BJ
+DENSERMS: 1e-06
+MAXITER: 200
+E_unit: kcal/mol

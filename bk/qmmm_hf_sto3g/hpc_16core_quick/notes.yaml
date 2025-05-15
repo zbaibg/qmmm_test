@@ -1,0 +1,16 @@
+id: hpc_16core_quick_noewald_apptainer
+name: HF STO-3G QUICK APPTAINER 16 cores
+group:
+comment:
+software: quick
+software_version: conda ambertools2025
+cpucore: 16
+gpu_num: 0
+input_rst: ../qmmm_hf.rst
+method: HF
+basis: STO-3G
+qm_ewald: 1 # This is 1 by default. Should set to 0 explicitly for qm/mm with quick-API
+dispersion_correction: D3BJ
+DENSERMS: 1e-06
+MAXITER: 200
+E_unit: kcal/mol

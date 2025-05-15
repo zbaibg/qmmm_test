@@ -1,0 +1,15 @@
+id: template_quick
+name: HF STO3G QUICK
+group:
+comment:
+software: quick
+software_version: /home/zbai29/JR/soft/apptainer/amber_cpu_single_node.sif
+cpucore: 8
+gpu_num: 0
+input_rst: ../qmmm_hf.rst
+method: HF
+basis: STO-3G
+dispersion_correction: D3BJ
+DENSERMS: 1e-06
+MAXITER: 200
+E_unit: kcal/mol

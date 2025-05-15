@@ -1,0 +1,26 @@
+id: run0
+name: HF STO3G QUICK
+group:
+comment:
+software: quick
+cpucore: 8
+gpu_num: 0
+traj: ../qmmm_pbe_Def2TZVP/hpc_10core_orca/qmmm.nc
+input_rst: ../qmmm_hf.rst
+method: HF
+basis: STO-3G
+dispersion_correction: D3BJ
+DENSERMS: 1e-06
+MAXITER: 200
+EPtot:
+- -1429475.6658
+- -1429474.8641
+- -1429450.3686
+- -1429429.8407
+- -1429438.5157
+- -1429464.9777
+- -1429474.5158
+- -1429460.3421
+- -1429438.2235
+- -1429436.5168
+E_unit: kcal/mol

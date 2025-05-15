@@ -1,0 +1,16 @@
+id: hpc_8core_quick_noewald_apptainer
+name: HF STO-3G QUICK APPTAINER 8 cores No Ewald
+group:
+comment:
+software: quick
+software_version: /home/zbai29/JR/soft/apptainer/amber_cpu_single_node.sif
+cpucore: 8
+gpu_num: 0
+input_rst: ../qmmm_hf.rst
+method: HF
+basis: STO-3G
+qmmm_ewald: 0 # This needs to be explicitly set to 0 for quick-API
+dispersion_correction: D3BJ
+DENSERMS: 1e-06
+MAXITER: 200
+E_unit: kcal/mol

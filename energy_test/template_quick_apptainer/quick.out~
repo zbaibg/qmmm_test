@@ -1,0 +1,106 @@
+| *********************************************************************************************************
+| **                                                                                                     **
+| **           888888888888                                                                              **
+| **         8888888888888888                                                                            **
+| **      888888888888888888                                                                             **
+| **     888888888888888888                                                                              **
+| **    888888888888888                                                                                  **
+| **   88888888888888888888                               88888                       8888:              **
+| **   8888888888888888888888Z                            88888                       8888:              **
+| **   888888888888888888888888?                          88888                       8888:              **
+| **   8888888888888      8888888                                        888888       8888:              **
+| **    88888888888         888888     8888:     88888    88888        888888888I     8888:    888888    **
+| **    8888888888           88888:    8888:     88888    88888      $888888888888    8888:   888888     **
+| **    I8Z 88888             88888    8888:     88888    88888    .888888     8888   8888: 888888       **
+| **    .8Z 88888             88888    8888:     88888    88888    $88888             8888:88888         **
+| **     8I 88888      .=88. .88888    8888:     88888    88888    88888              8888888888         **
+| **    :8  88888      888888$8888$    8888:     88888    88888    8888O              88888888888        **
+| **   ,7   +88888.     8888888888.    8888:     88888    88888    888888             88888O888888       **
+| **         $888888:.   .8888888      88888....888888    88888     888888     8888   8888:  888888      **
+| **          I8888888888888888888     888888888888888    88888     O888888888888O    8888:   888888     **
+| **            O888888888888888888     88888888888888    88888       88888888888$    8888:    888888    **
+| **               8888888Z     888      .8888I  88888    88888         8888888       8888:     888888   **
+| **                                                                                                     **
+| **                                                                                                     **
+| **                                         Copyright (c) 2025                                          **
+| **                          Regents of the University of California San Diego                          **
+| **                                    & Michigan State University                                      **
+| **                                        All Rights Reserved.                                         **
+| **                                                                                                     **
+| **             This software is subject to the terms of the Mozilla Public License, v. 2.0.            **
+| **                                                                                                     **
+| *********************************************************************************************************
+|                                                                                                          
+| Cite this work as:                                                                                       
+| Manathunga, M.; O'Hearn, K. A.; Shajan, A.; Smith, J.; Miao, Y.; He, X.; Ayers, K.;                      
+| Brothers, E.; Palos, E.; Tripathy, V.; Goetz, A.W.; Merz, K.M. QUICK-25.03.                              
+| University of California,San Diego, CA and                                                               
+| Michigan State University, East Lansing, MI, 2025                                                        
+|                                                                                                          
+| If you have any comments or queries, please reach out to us on GitHub issues or discussion sections:     
+| https://github.com/merzlab/QUICK.                                                                        
+|                                                                                                          
+| TASK STARTS ON: Wed May 14 13:37:38 2025
+| INPUT FILE :    quick.in
+| OUTPUT FILE:    quick.out
+| BASIS SET PATH: /ambertools25/AmberTools/src/quick/basis
+
+| - MPI Enabled -
+| TOTAL RANKS     =     8
+| MASTER NAME     = spark-a017                    
+
+ @ Read Job And Atom
+
+  KEYWORD=HF BASIS=STO-3G SCF=200 DENSERMS=.0000010000 CUTOFF=.0000000100 GRADCUTOFF=.0000001000 BASISCUTOFF=.0000010000 CHARGE=0 MULT=1 GRADIENT EXTCHARGES D3BJ
+ ============== JOB CARD =============
+ METHOD = HARTREE FOCK
+ USING GRIMME DISPERSION CORRECTION: REPACKAGED DFT-D3 LIBRARY v0.9
+   DISPERSION METHOD = D3, BJ DAMPING
+ DIRECT SCF 
+ SAD INITAL GUESS 
+ USE DIIS SCF
+ PRINT ENERGY EVERY CYCLE
+ READ SAD GUESS FROM FILE
+ EXTERNAL CHARGES
+ GRADIENT CALCULATION
+ MAX SCF CYCLES =    200
+ MAX DIIS CYCLES =   10
+ DELTA DENSITY START CYCLE =    3
+ COMPUTATIONAL CUTOFF: 
+      TWO-e INTEGRAL   =  0.100E-07
+      BASIS SET PRIME  =  0.100E-08
+      MATRIX ELEMENTS  =  0.100E-09
+      BASIS FUNCTION   =  0.100E-05
+      GRADIENT CUTOFF  =  0.100E-06
+ DENSITY MATRIX MAXIMUM RMS FOR CONVERGENCE  =  0.100E-05
+ BASIS SET = STO-3G,  TYPE = CARTESIAN
+| BASIS FILE = /ambertools25/AmberTools/src/quick/basis/STO-3G.BAS
+| DATA FILE  =    quick.dat
+| CEw = ON
+
+ @ Finish reading job
+
+ 
+ @ Running Step :            1
+ 
+
+ @ Begin SAD initial guess
+
+ For Atom Kind =    1
+ ELEMENT = ZN
+ BASIS FUNCTIONS =   19
+ For Atom Kind =    2
+ ELEMENT = C 
+ BASIS FUNCTIONS =    5
+ For Atom Kind =    3
+ ELEMENT = N 
+ BASIS FUNCTIONS =    5
+ For Atom Kind =    4
+ ELEMENT = H 
+ BASIS FUNCTIONS =    1
+
+ @ Finish SAD initial guess
+
+
+ @ Begin Reading Molecular Information
+

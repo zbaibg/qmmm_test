@@ -1,0 +1,11 @@
+qmmm.out
+orc_job.bibtex
+orc_job.densities
+orc_job.engrad
+orc_job.gbw
+orc_job.ges
+orc_job.pcgrad
+orc_job.property.txt
+old.*
+orc_job_atom*
+*.bk

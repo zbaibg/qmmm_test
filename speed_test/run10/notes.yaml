@@ -1,0 +1,21 @@
+id: run10
+name: HF STO-3G QUICK APPTAINER No Ewald 8 cores
+group: HF STO3G
+software: quick
+cpucore: 8
+gpu_num: 0
+input_rst: ../qmmm_hf.rst
+method: HF
+basis: STO-3G
+dispersion_correction: D3BJ
+MAXITER: 200
+E_unit: kcal/mol
+nstep: 10
+elapsed_s: 66.26
+sec_per_step: 6.626
+days_per_100ps: 3.834490740740741
+software_version: /home/zbai29/JR/soft/apptainer/amber_cpu_single_node.sif
+DENSERMS: 1e-06
+software_version_abbrev: apptainer
+qmmm_ewald: 0 # This needs to be explicitly set to 0 for quick-API
+timestep_fs: 2

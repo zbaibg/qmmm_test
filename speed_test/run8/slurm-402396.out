@@ -1,0 +1,76 @@
+running MPI with 8 cores
+--------------------------------------------------------------------------
+WARNING: The default btl_vader_single_copy_mechanism CMA is
+not available due to different user namespaces.
+
+The vader shared memory BTL will fall back on another single-copy
+mechanism if one is available. This may result in lower performance.
+
+  Local host: spark-a207
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: The default btl_vader_single_copy_mechanism CMA is
+not available due to different user namespaces.
+
+The vader shared memory BTL will fall back on another single-copy
+mechanism if one is available. This may result in lower performance.
+
+  Local host: spark-a207
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: The default btl_vader_single_copy_mechanism CMA is
+not available due to different user namespaces.
+
+The vader shared memory BTL will fall back on another single-copy
+mechanism if one is available. This may result in lower performance.
+
+  Local host: spark-a207
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: The default btl_vader_single_copy_mechanism CMA is
+not available due to different user namespaces.
+
+The vader shared memory BTL will fall back on another single-copy
+mechanism if one is available. This may result in lower performance.
+
+  Local host: spark-a207
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: The default btl_vader_single_copy_mechanism CMA is
+not available due to different user namespaces.
+
+The vader shared memory BTL will fall back on another single-copy
+mechanism if one is available. This may result in lower performance.
+
+  Local host: spark-a207
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: The default btl_vader_single_copy_mechanism CMA is
+not available due to different user namespaces.
+
+The vader shared memory BTL will fall back on another single-copy
+mechanism if one is available. This may result in lower performance.
+
+  Local host: spark-a207
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: The default btl_vader_single_copy_mechanism CMA is
+not available due to different user namespaces.
+
+The vader shared memory BTL will fall back on another single-copy
+mechanism if one is available. This may result in lower performance.
+
+  Local host: spark-a207
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: The default btl_vader_single_copy_mechanism CMA is
+not available due to different user namespaces.
+
+The vader shared memory BTL will fall back on another single-copy
+mechanism if one is available. This may result in lower performance.
+
+  Local host: spark-a207
+--------------------------------------------------------------------------
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** JOB 402396 ON spark-a207 CANCELLED AT 2025-05-14T14:17:55 ***
+slurmstepd: error: *** STEP 402396.0 ON spark-a207 CANCELLED AT 2025-05-14T14:17:55 ***

@@ -1,0 +1,30 @@
+MM MD simulation with constant pressure 
+ &cntrl
+  imin=0,
+  irest=1, ntx=5,    ! 表示读取速度和重启信息
+  ntb=2,
+  cut=8.0,
+  nstlim=10,      ! 继续再跑 50 ps（0.002 * 25000）
+  dt=0.002,
+  ntc=2, ntf=2,
+  tempi=300, temp0=300,
+  ntt=3, gamma_ln=1.0,
+  ntp=1, pres0=1.0, taup=2.0,
+  ntpr=1, ntwx=1, ntwr=10,
+  ifqnt=1,
+/
+
+&qmmm
+  qmmask=':1',       ! ZIF + 壳层残基编号
+  qmcharge=0,
+  qm_theory='QUICK',      ! 可用 semi-empirical 或 external（如 Gaussian）
+  qmcut=8.0,
+  writepdb=1,
+  qmmm_int=1,
+/
+&quick
+  !method='hf',
+  !basis='sto-3g',
+  keywords='HF BASIS=STO-3G SCF=200 DENSERMS=.0000010000 CUTOFF=.0000000100 GRADCUTOFF=.0000001000 BASISCUTOFF=.0000010000 CHARGE=0 MULT=1 GRADIENT EXTCHARGES D3BJ'
+/
+

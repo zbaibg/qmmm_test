@@ -1,0 +1,15 @@
+id: template_orca
+name: HF STO3G ORCA 16 cores
+group:
+comment:
+software: orca
+cpucore: 8
+gpu_num: 0
+traj: ../qmmm_pbe_Def2TZVP/hpc_10core_orca/qmmm.nc
+input_rst: ../qmmm_hf.rst
+method: HF
+basis: STO-3G
+dispersion_correction: D3BJ
+MAXITER: 125
+E_unit: kcal/mol
+SCF_E_tolerance: 1.0e-08 au

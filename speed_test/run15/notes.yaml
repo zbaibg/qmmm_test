@@ -1,0 +1,19 @@
+id: run15
+name: PC PBE Def2TZVP ORCA 20 cores
+group: PBE Def2TZVP
+software: orca
+cpucore: 20
+gpu_num: 0
+input_rst: ../qmmm_hf.rst
+method: PBE
+basis: Def2TZVP
+dispersion_correction: D3BJ
+MAXITER: 125
+E_unit: kcal/mol
+SCF_E_tolerance: 1.0e-08 au
+nstep: 10
+elapsed_s: 240.88
+sec_per_step: 24.088
+days_per_100ps: 13.939814814814817
+comment: Run on my PC
+timestep_fs: 2

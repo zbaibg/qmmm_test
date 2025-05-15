@@ -1,0 +1,21 @@
+id: run14
+name: PBE Def2TZVP QUICK APPTAINER 8 cores
+group: PBE Def2TZVP
+software: quick
+cpucore: 8
+gpu_num: 0
+input_rst: ../qmmm_hf.rst
+method: PBE
+basis: Def2TZVP
+dispersion_correction: D3BJ
+MAXITER: 200
+E_unit: kcal/mol
+nstep: 10
+elapsed_s: 9184.24
+sec_per_step: 918.424
+days_per_100ps: 531.4953703703703
+software_version: /home/zbai29/JR/soft/apptainer/amber_cpu_single_node.sif
+DENSERMS: 1e-06
+software_version_abbrev: apptainer
+qmmm_ewald: 0 # This needs to be explicitly set to 0 for quick-API
+timestep_fs: 2

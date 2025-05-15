@@ -1,0 +1,18 @@
+id: run6
+name: HF STO3G ORCA 8 cores
+group: HF STO3G
+software: orca
+cpucore: 8
+gpu_num: 0
+input_rst: ../qmmm_hf.rst
+method: HF
+basis: STO-3G
+dispersion_correction: D3BJ
+MAXITER: 125
+E_unit: kcal/mol
+SCF_E_tolerance: 1.0e-08 au
+nstep: 10
+elapsed_s: 359.4
+sec_per_step: 35.94
+days_per_100ps: 20.798611111111114
+timestep_fs: 2

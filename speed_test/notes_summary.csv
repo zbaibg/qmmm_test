@@ -1,0 +1,18 @@
+id,name,group,software,cpucore,gpu_num,input_rst,method,basis,dispersion_correction,MAXITER,E_unit,SCF_E_tolerance,nstep,elapsed_s,sec_per_step,days_per_100ps,software_version,qm_ewald,DENSERMS,software_version_abbrev,qmmm_ewald,comment,timestep_fs
+run0,HF STO3G ORCA 10 cores,HF STO3G,orca,8,0,../qmmm_hf.rst,HF,STO-3G,D3BJ,125,kcal/mol,1.0e-08 au,10,388.38,38.838,22.475694444444443,,,,,,,2
+run1,HF STO-3G QUICK APPTAINER 10 cores,HF STO3G,quick,10,0,../qmmm_hf.rst,HF,STO-3G,D3BJ,200,kcal/mol,,10,123.39,12.339,7.140625,conda ambertools2025,1.0,1e-06,conda,,,2
+run10,HF STO-3G QUICK APPTAINER No Ewald 8 cores,HF STO3G,quick,8,0,../qmmm_hf.rst,HF,STO-3G,D3BJ,200,kcal/mol,,10,66.26,6.626,3.834490740740741,/home/zbai29/JR/soft/apptainer/amber_cpu_single_node.sif,,1e-06,apptainer,0.0,,2
+run11,PBE Def2TZVP ORCA 10 cores,PBE Def2TZVP,orca,10,0,../qmmm_hf.rst,PBE,Def2TZVP,D3BJ,125,kcal/mol,1.0e-08 au,10,813.79,81.37899999999999,47.0943287037037,,,,,,,2
+run12,PBE Def2TZVP ORCA 20 cores,PBE Def2TZVP,orca,20,0,../qmmm_hf.rst,PBE,Def2TZVP,D3BJ,125,kcal/mol,1.0e-08 au,10,812.9,81.28999999999999,47.04282407407407,,,,,,,2
+run13,PBE Def2TZVP ORCA 5 cores,PBE Def2TZVP,orca,5,0,../qmmm_hf.rst,PBE,Def2TZVP,D3BJ,125,kcal/mol,1.0e-08 au,10,813.86,81.386,47.09837962962962,,,,,,,2
+run14,PBE Def2TZVP QUICK APPTAINER 8 cores,PBE Def2TZVP,quick,8,0,../qmmm_hf.rst,PBE,Def2TZVP,D3BJ,200,kcal/mol,,10,9184.24,918.424,531.4953703703703,/home/zbai29/JR/soft/apptainer/amber_cpu_single_node.sif,,1e-06,apptainer,0.0,,2
+run15,PC PBE Def2TZVP ORCA 20 cores,PBE Def2TZVP,orca,20,0,../qmmm_hf.rst,PBE,Def2TZVP,D3BJ,125,kcal/mol,1.0e-08 au,10,240.88,24.088,13.939814814814817,,,,,,Run on my PC,2
+run16,PBE LANL2DZ ORCA 10 cores,PBE LANL2DZ,orca,10,0,../qmmm_hf.rst,PBE,LANL2DZ,D3BJ,125,kcal/mol,1.0e-08 au,10,388.88,38.888,22.50462962962963,,,,,,,2
+run2,HF STO3G ORCA 16 cores,HF STO3G,orca,8,0,../qmmm_hf.rst,HF,STO-3G,D3BJ,125,kcal/mol,1.0e-08 au,10,484.99,48.499,28.066550925925927,,,,,,,2
+run3,HF STO-3G QUICK APPTAINER 16 cores,HF STO3G,quick,16,0,../qmmm_hf.rst,HF,STO-3G,D3BJ,200,kcal/mol,,10,89.66,8.966,5.188657407407407,conda ambertools2025,1.0,1e-06,conda,,,2
+run4,HF STO-3G QUICK APPTAINER 20 cores,HF STO3G,quick,20,0,../qmmm_hf.rst,HF,STO-3G,D3BJ,200,kcal/mol,,10,74.2,7.42,4.293981481481482,conda ambertools2025,1.0,1e-06,conda,,,2
+run5,HF STO-3G QUICK 5 cores,HF STO3G,quick,5,0,../qmmm_hf.rst,HF,STO-3G,D3BJ,200,kcal/mol,,10,131.58,13.158,7.614583333333334,conda ambertools2025,1.0,1e-06,conda,,,2
+run6,HF STO3G ORCA 8 cores,HF STO3G,orca,8,0,../qmmm_hf.rst,HF,STO-3G,D3BJ,125,kcal/mol,1.0e-08 au,10,359.4,35.94,20.798611111111114,,,,,,,2
+run7,HF STO-3G QUICK 8 cores,HF STO3G,quick,8,0,../qmmm_hf.rst,HF,STO-3G,D3BJ,200,kcal/mol,,10,101.77,10.177,5.889467592592593,conda ambertools2025,1.0,1e-06,conda,,,2
+run8,HF STO-3G QUICK APPTAINER 8 cores,HF STO3G,quick,8,0,../qmmm_hf.rst,HF,STO-3G,D3BJ,200,kcal/mol,,10,87.05,8.705,5.0376157407407405,/home/zbai29/JR/soft/apptainer/amber_cpu_single_node.sif,1.0,1e-06,apptainer,,,2
+run9,HF STO-3G QUICK No Ewald 8 cores,HF STO3G,quick,8,0,../qmmm_hf.rst,HF,STO-3G,D3BJ,200,kcal/mol,,10,67.15,6.715000000000001,3.8859953703703702,conda ambertools2025,,1e-06,conda,0.0,,2

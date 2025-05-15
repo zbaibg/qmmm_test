@@ -1,9 +1,0 @@
-! PBE Def2-TZVP TightSCF D3BJ
-
-%pal
-    nprocs 10
-end
-! ENGRAD
-! Angs NoUseSym
-%pointcharges "ptchrg.xyz"
-*xyzfile 0 1 inpfile.xyz

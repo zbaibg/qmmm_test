@@ -1,0 +1,26 @@
+id: run1
+name: HF STO3G ORCA
+group:
+comment:
+software: orca
+cpucore: 8
+gpu_num: 0
+traj: ../qmmm_pbe_Def2TZVP/hpc_10core_orca/qmmm.nc
+input_rst: ../qmmm_hf.rst
+method: HF
+basis: STO-3G
+dispersion_correction: D3BJ
+MAXITER: 125
+EPtot:
+- -1429483.8737
+- -1429483.4776
+- -1429458.9178
+- -1429438.518
+- -1429447.0702
+- -1429473.9643
+- -1429483.0786
+- -1429469.9009
+- -1429446.4918
+- -1429445.7317
+E_unit: kcal/mol
+SCF_E_tolerance: 1.0e-08 au

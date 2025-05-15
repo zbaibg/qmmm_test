@@ -1,0 +1,18 @@
+id: run16
+name: PBE LANL2DZ ORCA 10 cores
+group: PBE LANL2DZ
+software: orca
+cpucore: 10
+gpu_num: 0
+input_rst: ../qmmm_hf.rst
+method: PBE
+basis: LANL2DZ
+dispersion_correction: D3BJ
+MAXITER: 125
+E_unit: kcal/mol
+SCF_E_tolerance: 1.0e-08 au
+nstep: 10
+elapsed_s: 388.88
+sec_per_step: 38.888
+days_per_100ps: 22.50462962962963
+timestep_fs: 2

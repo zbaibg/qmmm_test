@@ -1,0 +1,22 @@
+MM MD simulation with constant pressure 
+ &cntrl
+  imin=6,            ! Single point energy calculation
+  nstlim = 0,        ! Single point evaluation
+  ntp = 1,           ! For constant pressure periodic boundaries
+  cut=8.0,           ! Nonbonded cutoff
+  ntpr=1,            ! Print every step
+  ifqnt=1,           ! QM/MM calculation
+/
+&qmmm
+  qmmask=':1',       ! ZIF + 壳层残基编号
+  qmcharge=0,
+  qm_theory='EXTERN',      ! 可用 semi-empirical 或 external（如 Gaussian）
+  qmcut=8.0,
+  writepdb=1,
+  qmmm_int=1,
+  qm_ewald=0,
+/
+&orc
+  use_template=1,
+/
+
